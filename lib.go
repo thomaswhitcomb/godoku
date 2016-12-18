@@ -28,7 +28,7 @@ func makeFacts(grid *string, cellIndex *[]string) *FactList {
 	return &factList
 }
 func getUnsolvedFact(values *Values) *Fact {
-	for _, key := range *CellIndex() {
+	for _, key := range *CellIndex {
 		value, exists := (*values)[key] // this is cool.  double return checks for existence
 		if exists && len(value) != 1 {
 			return &Fact{key, value}
@@ -38,7 +38,7 @@ func getUnsolvedFact(values *Values) *Fact {
 }
 func valuesToGrid(values *Values) *string {
 	var grid = ""
-	for _, key := range *CellIndex() {
+	for _, key := range *CellIndex {
 		v := (*values)[key]
 		if len(v) == 1 {
 			grid = grid + v
@@ -64,7 +64,7 @@ func assign(values *Values, cell *string, value *string) *Values {
 	}
 	(*values)[*cell] = *value
 	var domain string
-	var unit = (*Peers())[*cell]
+	var unit = (*Peers)[*cell]
 	for c, _ := range unit {
 		domain = (*values)[c]
 		if strings.Contains(domain, *value) {
@@ -108,7 +108,7 @@ func willItConflict(values *Values, cell *string, value *string) bool {
 
 	var localValues = cloneValues(values)
 	(*localValues)[*cell] = *value
-	var unitList = (*Units())[*cell]
+	var unitList = (*Units)[*cell]
 	return hasConflictInUnitList(localValues, &unitList)
 
 }
@@ -144,8 +144,8 @@ func forward(factList *FactList, values *Values) *Values {
 }
 
 func SolveGrid(grid *string) *string {
-	values := initializeValues(Cells())
-	factList := makeFacts(grid, CellIndex())
+	values := initializeValues(Cells)
+	factList := makeFacts(grid, CellIndex)
 	values = forward(factList, values)
 	if len(*values) == 0 {
 		return new(string)
