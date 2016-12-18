@@ -38,7 +38,7 @@ func TestUnits(t *testing.T) {
 	for cell, _ := range *Cells {
 		ul = (*Units)[cell]
 		if len(ul) != 3 {
-			t.Error(fmt.Sprintf("TestUnits - Bad unit count. %s -> %s", cell, ul))
+			t.Error(fmt.Sprintf("TestUnits - Bad unit count."))
 		}
 	}
 	c2_ul := (*Units)["C2"]
@@ -62,7 +62,7 @@ func TestPeers(t *testing.T) {
 	for cell, _ := range *Cells {
 		unit = (*Peers)[cell]
 		if len(unit) != 20 {
-			t.Error("TestPeers - bad length: %s %d ", cell, len(unit))
+			t.Error("TestPeers - bad length ", cell, len(unit))
 		}
 	}
 	unit = (*Peers)["C2"]
