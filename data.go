@@ -13,8 +13,8 @@ func init() {
 
 	CellIndex = createCellIndex(Cells)
 
-	var rowPartition *PartitionType = BuildPartition(ROWS_IN_QUADRANT, Row_ids)
-	var colPartition *PartitionType = BuildPartition(COLS_IN_QUADRANT, Col_ids)
+	var rowPartition = BuildPartition(ROWS_IN_QUADRANT, Row_ids)
+	var colPartition = BuildPartition(COLS_IN_QUADRANT, Col_ids)
 	UnitList = BuildUnitList(rowPartition, colPartition)
 
 	Units = buildUnits()
@@ -61,7 +61,7 @@ func BuildUnitList(rowPartition *PartitionType, colPartition *PartitionType) *Un
 	return &ul
 }
 func createCellIndex(cells *UnitType) *[]string {
-	index := make([]string, 0, len(*cells))
+	var index = make([]string, 0, len(*cells))
 	for key, _ := range *cells {
 		index = append(index, key)
 	}

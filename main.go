@@ -1,12 +1,14 @@
 package main
 
 import "fmt"
+import "github.com/gorilla/mux"
 import "net/http"
 import "strconv"
+import "log"
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r.URL.Path[1:])
-	var grid = r.URL.Path[1:]
+	var vars = mux.Vars(r)
+	var grid = vars["grid"]
 	if len(grid) != 81 {
 		var s = strconv.Itoa(http.StatusNotImplemented) + ": Grid must be 81 characters (9x9)"
 		fmt.Println(s)
@@ -26,7 +28,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", handler)
-	http.ListenAndServe(":8080", nil)
-	fmt.Println("waiting to serve")
+	var router = mux.NewRouter()
+	router.HandleFunc("/run/{grid}", handler)
+	// Bind to a port and pass our router in
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
