@@ -21,7 +21,7 @@ func makeFacts(grid *string, cellIndex *[]string) *FactList {
 	var factList = make(FactList, 0, len(Col_ids)*len(Row_ids))
 	for i, key := range *cellIndex {
 		if (*grid)[i] != '0' {
-			fact := Fact{key, string((*grid)[i])}
+			var fact = Fact{key, string((*grid)[i])}
 			factList = append(factList, &fact)
 		}
 	}
@@ -39,7 +39,7 @@ func getUnsolvedFact(values *Values) *Fact {
 func valuesToGrid(values *Values) *string {
 	var grid = ""
 	for _, key := range *CellIndex {
-		v := (*values)[key]
+		var v = (*values)[key]
 		if len(v) == 1 {
 			grid = grid + v
 		} else {
@@ -144,8 +144,8 @@ func forward(factList *FactList, values *Values) *Values {
 }
 
 func SolveGrid(grid *string) *string {
-	values := initializeValues(Cells)
-	factList := makeFacts(grid, CellIndex)
+	var values = initializeValues(Cells)
+	var factList = makeFacts(grid, CellIndex)
 	values = forward(factList, values)
 	if len(*values) == 0 {
 		return new(string)
