@@ -35,13 +35,13 @@ func TestPartition(t *testing.T) {
 
 func TestUnits(t *testing.T) {
 	var ul UnitListType
-	for cell, _ := range *Cells() {
-		ul = (*Units())[cell]
+	for cell, _ := range *Cells {
+		ul = (*Units)[cell]
 		if len(ul) != 3 {
 			t.Error(fmt.Sprintf("TestUnits - Bad unit count. %s -> %s", cell, ul))
 		}
 	}
-	c2_ul := (*Units())["C2"]
+	c2_ul := (*Units)["C2"]
 	c2_ul_0 := c2_ul[0]
 	c2_ul_1 := c2_ul[1]
 	c2_ul_2 := c2_ul[2]
@@ -59,13 +59,13 @@ func TestUnits(t *testing.T) {
 
 func TestPeers(t *testing.T) {
 	var unit UnitType
-	for cell, _ := range *Cells() {
-		unit = (*Peers())[cell]
+	for cell, _ := range *Cells {
+		unit = (*Peers)[cell]
 		if len(unit) != 20 {
 			t.Error("TestPeers - bad length: %s %d ", cell, len(unit))
 		}
 	}
-	unit = (*Peers())["C2"]
+	unit = (*Peers)["C2"]
 	if !unit["A2"] || !unit["B2"] || !unit["D2"] || !unit["E2"] || !unit["F2"] || !unit["G2"] || !unit["H2"] || !unit["I2"] || !unit["C1"] || !unit["C3"] || !unit["C4"] || !unit["C5"] || !unit["C6"] || !unit["C7"] || !unit["C8"] || !unit["C9"] || !unit["A1"] || !unit["A3"] || !unit["B1"] || !unit["B3"] {
 		t.Error("TestPeers - Bad C2")
 	}

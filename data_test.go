@@ -4,8 +4,8 @@ import "testing"
 import "fmt"
 
 func TestCells(t *testing.T) {
-	if len(*Cells()) != 81 {
-		t.Error(fmt.Sprintf("TestCells - expected 81 but got %d", len(*Cells())))
+	if len(*Cells) != 81 {
+		t.Error(fmt.Sprintf("TestCells - expected 81 but got %d", len(*Cells)))
 	}
 }
 

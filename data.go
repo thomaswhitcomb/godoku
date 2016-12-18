@@ -2,39 +2,24 @@ package main
 
 import "sort"
 
-var CellIndex func() *[]string
-var Cells func() *UnitType
-var UnitList func() *UnitListType
-var Units func() *UnitListMapType
-var Peers func() *UnitMapType
+var CellIndex *[]string
+var Cells *UnitType
+var UnitList *UnitListType
+var Units *UnitListMapType
+var Peers *UnitMapType
 
 func init() {
-	var x *UnitType = Cross(Row_ids, Col_ids)
-	Cells = func() *UnitType {
-		return x
-	}
+	Cells = Cross(Row_ids, Col_ids)
 
-	var cellIndex = createCellIndex(Cells())
-	CellIndex = func() *[]string {
-		return cellIndex
-	}
+	CellIndex = createCellIndex(Cells)
 
 	var rowPartition *PartitionType = BuildPartition(ROWS_IN_QUADRANT, Row_ids)
 	var colPartition *PartitionType = BuildPartition(COLS_IN_QUADRANT, Col_ids)
-	var unitList = BuildUnitList(rowPartition, colPartition)
-	UnitList = func() *UnitListType {
-		return unitList
-	}
+	UnitList = BuildUnitList(rowPartition, colPartition)
 
-	var units = buildUnits()
-	Units = func() *UnitListMapType {
-		return units
-	}
+	Units = buildUnits()
 
-	var peers = buildPeers()
-	Peers = func() *UnitMapType {
-		return peers
-	}
+	Peers = buildPeers()
 
 }
 
@@ -87,10 +72,10 @@ func createCellIndex(cells *UnitType) *[]string {
 func buildUnits() *UnitListMapType {
 	var ul UnitListType
 	var units = make(UnitListMapType, 0)
-	for c, _ := range *Cells() {
+	for c, _ := range *Cells {
 		ul = make(UnitListType, 0, 3)
 		units[c] = ul
-		for _, a_ul := range *UnitList() {
+		for _, a_ul := range *UnitList {
 			if a_ul[c] {
 				units[c] = append(units[c], a_ul)
 			}
@@ -101,8 +86,8 @@ func buildUnits() *UnitListMapType {
 func buildPeers() *UnitMapType {
 	var ul UnitListType
 	var peers = make(UnitMapType, 0)
-	for c, _ := range *Cells() {
-		ul = (*Units())[c]
+	for c, _ := range *Cells {
+		ul = (*Units)[c]
 		var u = make(UnitType, 0)
 		for _, unit := range ul {
 			for cell, _ := range unit {
