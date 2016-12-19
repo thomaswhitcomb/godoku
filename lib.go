@@ -151,5 +151,8 @@ func SolveGrid(grid *string) *string {
 		return new(string)
 	}
 	var newvalues = backward(values)
+	if len(*newvalues) == 0 {
+		return new(string)
+	}
 	return valuesToGrid(newvalues)
 }
