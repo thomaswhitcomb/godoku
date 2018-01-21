@@ -7,6 +7,7 @@ clean:
 compile:
 	@echo "==> Compiling source code."
 	@go build -v -o ./bin/godoku $(go list ./... | grep -v /vendor/)
+	cp ./bin/godoku ./bin/application
 
 coverage:
 	@go test -coverprofile cover.out
@@ -23,6 +24,7 @@ fmt:
 race_compile:
 	@echo "==> Compiling source code."
 	@go build -v -race -o ./bin/godoku $(go list ./... | grep -v /vendor/)
+	cp ./bin/godoku ./bin/application
 
 test: fmt vet
 	@echo "==> Running tests."

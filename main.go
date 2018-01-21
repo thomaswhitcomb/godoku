@@ -29,7 +29,15 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	var router = mux.NewRouter()
-	router.HandleFunc("/run/{grid}", handler)
+	router.HandleFunc("/",
+		func(w http.ResponseWriter, r *http.Request) {
+			fmt.Fprintf(w, "GODOKU - Sudoku written in Go.  Enter a string of 81 characters ranging 0 - 9 for a sudoku board.  A zero is an empty slot.  Usage: /game/{string of 81 characters of 0-9}. Example /game/123050000450789023709003006204005097360000214090010300001002970000900530900501040")
+		})
+	router.HandleFunc("/game/{grid}", handler)
+	router.HandleFunc("/health",
+		func(w http.ResponseWriter, r *http.Request) {
+			fmt.Fprintf(w, "OK")
+		})
 	// Bind to a port and pass our router in
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(":5000", router))
 }
