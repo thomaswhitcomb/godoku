@@ -29,7 +29,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	var router = mux.NewRouter()
-	router.HandleFunc("/run/{grid}", handler)
+	router.HandleFunc("/game/{grid}", handler)
 	// Bind to a port and pass our router in
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
