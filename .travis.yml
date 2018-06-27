@@ -11,7 +11,7 @@ before_install:
   # Make the binary executable
   - chmod +x $GOPATH/bin/dep
 install:
-  - go get -u github.com/aws/aws-lambda-go/lambda
+  - go get -u github.com/gorilla/mux
   # This script is used by the Travis build to install a cookie for
   # go.googlesource.com so rate limits are higher when using `go get` to fetch
   # packages that live there.
