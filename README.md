@@ -7,4 +7,16 @@
 godoku
 =========
 
-sudoku solver written in go
+sudoku solver written in go.
+runs on port 8080.
+/game/{81 digits representing the grid in row major order}
+
+build
+=========
+
+make
+
+run
+=========
+
+./bin/godoku
